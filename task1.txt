@@ -1,0 +1,32 @@
+create database social_app;
+use social_app;
+create table user_profile(user_id int, user_name varchar(240), user_location varchar(240));
+insert into user_profile values(1, "yogesh", "chennai"), (2, "Ashok", "Bangalore"), (3, "raju", "Trichy"), (4, "nagu", "madurai"), (5, "kutty", "salem");
+select * from user_profile;
+create table profile_status(user_id int, user_status varchar(240));
+insert into profile_status values (1, "busy"), (2, "away"), (3, "available"), (4, "status unknown"), (5, "in a meeting");
+select * from profile_status;
+create table friends (friends_id int, friends_name varchar (240), friends_location varchar (240));
+-- Alter table friends add mutual_friend_id int;
+insert into friends values (15, "gowtham", "salem", 8), (16, "iyer", "delhi", 9);
+select * from friends;
+create table comments (user_id int, user_name varchar (240), user_comments varchar (240));
+insert into comments values (3, "raju", "superb man");
+select * from comments where user_id=3 limit 5;
+create table likes (user_id int, user_name varchar(240), total_likes int);
+insert into likes values(2, "ashok", 101), (4, "nagu", 56), (1, "yogesh", 127), (5, "kutty", 86), (3, "raju", 47);
+select * from likes;
+create table user_login_details(user_id int, user_mail varchar(240), user_password varchar(240));
+insert into user_login_details values(1, "yo@gmail.com", "qwerty"), (2, "virat@gmail.com", "123asdf"), (3, "raju@gmail.com", "raju123"), (4, "nagu@gmail.com", "nagu789"), (5, "kutty@gmail.com", "kutty456");
+insert into user_login_details values (3, "raju@yahoo.com", "raju123");
+delete from user_login_details where user_id=3;
+select * from user_login_details;
+create table posts(user_id int, user_name varchar(240), user_posts varchar(240));
+insert into posts values(2, "ashok", "picture"), (5, "kutty", "quotes"), (3,"raju", "birthday video"), (5, "kutty", "picture"), (1, "yogesh", "reels");
+
+-- Queries 
+select * from friends as f inner join user_profile as up on f.mutual_friend_id = up.user_id;
+select * from posts where user_id = 5;
+select * from user_login_details where user_mail like "%gmail%";
+select * from comments where user_id=3 limit 5;
+select * from user_profile as up join profile_status as ps on up.user_id = ps.user_id join user_login_details as uld on up.user_id = uld.user_id;
